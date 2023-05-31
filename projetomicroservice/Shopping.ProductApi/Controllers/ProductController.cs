@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shopping.ProductApi.Data.ValueObjects;
-using Shopping.ProductApi.Repository;
+using Shopping.ProductApi.Repository.Interfaces;
 
 namespace Shopping.ProductApi.Controllers
 {
@@ -17,8 +17,7 @@ namespace Shopping.ProductApi.Controllers
                 ArgumentNullException(nameof(repository));
         }
 
-        [HttpGet]
-        [Route("FindAll")]
+        [HttpGet]       
         public async Task<ActionResult<IEnumerable<ProductVO>>> FindAll()
         {
             var products = await _repository.FindAll();
@@ -35,7 +34,7 @@ namespace Shopping.ProductApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductVO>> Create(ProductVO productVO)
+        public async Task<ActionResult<ProductVO>> Create([FromBody] ProductVO productVO)
         {
             if (productVO == null) return BadRequest();
             var product = await _repository.Create(productVO);
@@ -43,7 +42,7 @@ namespace Shopping.ProductApi.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ProductVO>> Update(ProductVO productVO)
+        public async Task<ActionResult<ProductVO>> Update([FromBody] ProductVO productVO)
         {
             if (productVO == null) return BadRequest();
             var product = await _repository.Update(productVO);

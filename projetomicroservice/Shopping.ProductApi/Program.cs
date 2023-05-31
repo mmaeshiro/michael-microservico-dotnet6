@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Shopping.ProductApi.Config;
 using Shopping.ProductApi.Model.Context;
 using Shopping.ProductApi.Repository;
+using Shopping.ProductApi.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

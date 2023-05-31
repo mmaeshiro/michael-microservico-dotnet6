@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Shopping.ProductApi.Data.ValueObjects;
 using Shopping.ProductApi.Model;
 using Shopping.ProductApi.Model.Context;
+using Shopping.ProductApi.Repository.Interfaces;
 
 namespace Shopping.ProductApi.Repository
 {

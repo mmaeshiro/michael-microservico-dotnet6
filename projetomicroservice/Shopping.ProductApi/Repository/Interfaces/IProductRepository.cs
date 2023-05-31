@@ -1,6 +1,6 @@
 ﻿using Shopping.ProductApi.Data.ValueObjects;
 
-namespace Shopping.ProductApi.Repository
+namespace Shopping.ProductApi.Repository.Interfaces
 {
     public interface IProductRepository
     {
