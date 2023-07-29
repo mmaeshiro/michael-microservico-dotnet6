@@ -1,31 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shopping.Web.Models;
 using Shopping.Web.Services.IServices;
+using Shopping.Web.Utils;
 
 namespace Shopping.Web.Controllers
 {
 	public class ProductController : Controller
 	{
 		private readonly IProductServices _productService;
-
+		
 		public ProductController(IProductServices productService)
 		{
 			_productService = productService ??
 				throw new ArgumentNullException(nameof(productService));
 		}
 
+		[Authorize]
 		public async Task<IActionResult> ProductIndex()
 		{
 			var products = await _productService.FindAllProducts();
 
 			return View(products);
 		}
-
+		
 		public async Task<IActionResult> ProductCreate()
 		{
 			return View();
 		}
 
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> ProductCreate(ProductModel productModel)
 		{
@@ -47,6 +51,7 @@ namespace Shopping.Web.Controllers
 			return NotFound();
 		}
 
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> ProductUpdate(ProductModel productModel)
 		{
@@ -67,8 +72,9 @@ namespace Shopping.Web.Controllers
 			if (product != null) return View(product);
 			return NotFound();
 		}
-
+		
 		[HttpPost]
+		[Authorize(Roles = Role.Admin)]
 		public async Task<IActionResult> ProductDelete(ProductModel productModel)
 		{
 
